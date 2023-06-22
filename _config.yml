@@ -15,7 +15,7 @@ future: true
 
 # SNS settings
 RSS: false
-# weibo_username: 
+weibo_username: 一个陈家辉
 # zhihu_username: 
 github_username: Chenjiahui0
 # twitter_username: 
@@ -60,8 +60,11 @@ kramdown:
       line_numbers: true
       start_line: 1
 
-# Disqus settings
-disqus_username: chenjh
+# Google Analytics
+
+
+# Disqus
+disqus-shortname: thedevslot
 
 # Netease settings
 netease_comment: false
@@ -71,8 +74,7 @@ netease_comment: false
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: "UA-49627206-1" # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+google-ga_track_id: UA-163806439-1
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
