@@ -7,7 +7,7 @@ SEOTitle: 陈家辉的博客 | Chen Jiahui Blog
 header-img: img/home-bg.jpg
 email: 876492153@qq.com
 keyword: "后端开发"
-url: "" # your host, for absolute URL
+url: "https://chenjiahui0.github.io" # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
@@ -91,4 +91,4 @@ service-worker: true
 page-mathjax: false
 
 # Friends
-# friends:
+friends: []
