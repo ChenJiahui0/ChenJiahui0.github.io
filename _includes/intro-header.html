@@ -5,14 +5,14 @@
 
 {% if include.type == 'post' or include.type == 'page' %}
 <style type="text/css">
-    {% if page.header-img.indexOf("http") == 0 %}
+    {% if page.post-http == 'true' %}
     header.intro-header{
         position: relative;
         background-image: url('{{ page.header-img }}');
         background: {{ page.header-bg-css }};
     }
     {% endif %}
-    {% if page.header-img.indexOf("http") != 0 %}
+    {% if page.post-http != 'true' %}
     header.intro-header{
         position: relative;
         background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');
