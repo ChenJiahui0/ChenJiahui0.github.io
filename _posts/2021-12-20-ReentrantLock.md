@@ -3,8 +3,10 @@ title: ReentrantLock源码解析
 layout: post
 author: 陈家辉
 tags:
-- 数据结构
-- 物理存储
+- Java
+- 锁
+- 同步机制
+- 源码
 ---
 
 Java中的大部分同步类（Lock、Semaphore、ReentrantLock等）都是基于AbstractQueuedSynchronizer（简称为AQS）实现的。AQS是一种提供了原子式管理同步状态、阻塞和唤醒线程功能以及队列模型的简单框架。本文会从应用层逐渐深入到原理层，并通过ReentrantLock的基本特性和ReentrantLock与AQS的关联，来深入解读AQS相关独占锁的知识点，同时采取问答的模式来帮助大家理解AQS。
