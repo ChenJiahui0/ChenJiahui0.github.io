@@ -1,7 +1,7 @@
 ---
 title: etcd之客户端设计
 layout: post
-header-img: "https://raw.githubusercontent.com/etcd-io/etcd/main/logos/etcd-horizontal-color.png"
+header-img: "https://w.wallhaven.cc/full/ex/wallhaven-ex9gwo.png"
 description: etcd系列第二篇博客
 author: 陈家辉
 tags:
