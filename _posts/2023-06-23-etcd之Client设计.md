@@ -1,7 +1,7 @@
 ---
 title: etcd之客户端设计.md
 layout: post
-header-img: "https://cdn.jsdelivr.net/gh/Chenjiahui0/picture@main/202306231736208.png"
+header-img: "https://github.com/etcd-io/etcd/blob/main/logos/etcd-horizontal-color.png"
 description: etcd系列第二篇博客
 author: 陈家辉
 tags:
