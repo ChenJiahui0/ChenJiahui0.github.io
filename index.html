@@ -24,7 +24,7 @@ description: "「生活驱动技术，一切从热爱生活开始」"
     </a>
     <p class="post-meta">
         Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
-        <a href="http://foo.com/bar.html#disqus_thread">Link</a>.
+        <a href="{{post.absolute_url}}#disqus_thread">Post a comment</a>.
     </p>
 </div>
 <hr>
