@@ -64,7 +64,7 @@ kramdown:
 
 
 # Disqus
-disqus_username: chenjiahui0
+disqus_shortname: chenjiahui0
 # Netease settings
 netease_comment: false
 
