@@ -1,5 +1,5 @@
 ---
-title: etcd入门篇二之learner设计
+title: etcd入门篇三之learner设计
 layout: post
 header-img: "https://w.wallhaven.cc/full/ex/wallhaven-ex9gwo.png"
 description: etcd系列第三篇博客
