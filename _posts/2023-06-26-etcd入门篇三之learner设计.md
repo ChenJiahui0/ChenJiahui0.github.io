@@ -14,7 +14,7 @@ tags:
 
 ## 1 新成员导致Leader过载
 
-一个新的etcd端点加入集群，由于没有任何数据，需要从leader获取更多的更新直到追上leader的日志。这就导致leader节点的网络更可能过载、阻塞或者失去和从节点的心跳。在这种情况下，flower可能会发起新的leader竞选。也就是说，拥有新成员的集群更容易受到领导人选举的影响。领导者选择和随后的更新传播到新成员都容易导致集群不可用的时期(参见*Figure 1*)。
+一个新的etcd端点加入集群，由于没有任何数据，需要从leader获取更多的更新直到追上leader的日志。这就导致leader节点的网络更可能过载、阻塞或者失去和从节点的心跳。在这种情况下，flower可能会发起新的leader竞选。也就是说，拥有新成员的集群更容易受到领导人选举的影响。leader选择和随后的更新传播到新成员都容易导致集群不可用的时期(参见*Figure 1*)。
 
 ![server-learner-figure-01](https://cdn.jsdelivr.net/gh/CJH876492153/picture@main/server-learner-figure-01.png)
 
@@ -69,5 +69,43 @@ tags:
 
 ![server-learner-figure-09](https://cdn.jsdelivr.net/gh/CJH876492153/picture@main/server-learner-figure-09.png)
 
-如上所述，一个简单的错误配置就可能使整个集群失效，进入不可操作的状态。在这种情况下，操作员需要使用 `etcd  --force-new-cluster` 标志手动重新创建集群。由于 etcd 已成为 Kubernetes 的关键任务服务，即使是最轻微的中断也可能对用户产生重大影响。我们怎样才能使这些操作更容易？其中，领导人选举对集群的可用性最为关键: 我们是否可以通过不改变法定人数来降低成员重组的破坏性？一个新节点是否可以空闲，只请求领导者的最小更新，直到它赶上？成员资格错误配置是否总是可逆的，并且能够以更安全的方式处理(错误的成员添加命令运行应该永远不会使集群失败) ？用户添加新成员时是否应该担心网络拓扑？无论节点的位置和正在进行的网络分区如何，成员可以添加 API 吗？
+如上所述，一个简单的错误配置就可能使整个集群失效，进入不可操作的状态。在这种情况下，操作员需要使用 `etcd  --force-new-cluster` 标志手动重新创建集群。由于 etcd 已成为 Kubernetes 的关键任务服务，即使是最轻微的中断也可能对用户产生重大影响。我们怎样才能使这些操作更容易？其中，领导人选举对集群的可用性最为关键: 我们是否可以通过不改变法定人数来降低成员重组的破坏性？一个新节点是否可以空闲，只请求leader的最小更新，直到它赶上？成员错误配置是否总是可逆的，并且能够以更安全的方式处理(错误的成员添加命令运行应该永远不会使集群失败) ？用户添加新成员时是否应该担心网络拓扑？无论节点的位置和正在进行的网络分区如何，member add API 都可以正常工作？
+
+
+
+# Raft Learner
+
+为了解决上一节中的可用性问题， [Raft §4.2.1](https://github.com/ongardie/dissertation/blob/master/stanford.pdf)引入了一个新的节点状态“ **Learner**”，它作为非投票成员加入集群，直到赶上leader的日志。
+
+
+
+## v3.4 特性
+
+`member add --learner`命令可以添加一个新的learner。
+
+![server-learner-figure-10](https://etcd.io/docs/v3.5/learning/img/server-learner-figure-10.png)
+
+当learner追上leader的进度后，可以通过`member promoted`命令将learner提升为voting member(参见Figure 11)。
+
+![server-learner-figure-11](https://etcd.io/docs/v3.5/learning/img/server-learner-figure-11.png)
+
+etcd服务端会校验promote请求，确保集群可用性。只有在learner进入就绪状态才会执行promote。
+
+![server-learner-figure-12](https://etcd.io/docs/v3.5/learning/img/server-learner-figure-12.png)
+
+learner作为备用节点：不能成为leader，不能进行读写。
+
+![server-learner-figure-13](https://etcd.io/docs/v3.5/learning/img/server-learner-figure-13.png)
+
+此外，etcd限制了一个集群的learner数量，防止leader由于大量的日志复制导致过载。
+
+## 未来版本特性
+
+将learner作为节点的默认唯一状态：将新成员状态默认设置为learner将大大提高成员重新配置的安全性，因为learner不会更改quorum，错误配置总是可逆的。
+
+晋升自动化: 一旦learner赶上leader的日志，集群就可以自动将learner提升。Etcd 要求用户定义某些阈值，一旦满足了要求，learner将自己升级为有voting member。从用户的角度来看，“成员添加”命令的工作方式与今天相同，但learner功能提供了更大的安全性。
+
+将learner作为备用故障转移节点: learner作为备用节点加入，并在集群可用性受到影响时自动升级。
+
+learner只读: learner可以充当一个永远不会升级的只读节点。在弱一致性模式下，learner只从leader那里接收数据，从不处理写作。在没有一致性开销的情况下在本地提供读取服务将极大地减少对leader的工作负载，但可能提供过时的数据。在强一致性模式下，learner向leader请求读取索引以提供最新数据。
 
