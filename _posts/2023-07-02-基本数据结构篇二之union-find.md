@@ -1,12 +1,13 @@
 ---
 title: 基本数据结构篇二之并查集
-published: false
+published: true
 layout: post
 author: 陈家辉
 tags:
 - 数据结构
 - 算法
 - 基础
+- 古城算法
 ---
 
 # 引用
@@ -28,7 +29,7 @@ tags:
 
 ### 基础模板
 
-```JAVA
+```java
 public class DSU {
     int[] parent;
     public DSU(int n){
@@ -126,7 +127,7 @@ public class DSU {
 
 <img src="https://cdn.jsdelivr.net/gh/Chenjiahui0/picture@main/202307021548007.png" alt="image-20230702154821968" style="zoom:67%;" />
 
-```JAVA
+```java
 class Solution {
     public int findCircleNum(int[][] isConnected) {
         DSU dsu = new DSU(isConnected.length);
@@ -157,8 +158,6 @@ public class DSU {
     }
 }
 ```
-
-
 
 ![img](https://cdn.jsdelivr.net/gh/Chenjiahui0/picture@main/202307021603726.png)
 
@@ -271,4 +270,16 @@ class DSU{
     }
 }
 ```
+
+# 总结
+
+![img](https://cdn.jsdelivr.net/gh/Chenjiahui0/picture@main/202307032323720.png)
+
+并查集是一种树形的数据结构，用于处理不交集的合并及查询问题。
+
+有三种优化形式：
+
+1. Path compression
+2. Union by size
+3. Union by rank
 
