@@ -214,7 +214,6 @@ self.addEventListener('fetch', event => {
       console.log(`fetch ${event.request.url}`)
       event.waitUntil(revalidateContent(cached, fetchedCopy))
     }
-    fixBrace()
   }
 });
 
@@ -267,20 +266,3 @@ function revalidateContent(cachedResp, fetchedResp) {
     })
     .catch(err => console.log(err))
 }
-var fixBrace = function () {
-  var list = document.querySelectorAll('code');
-  list.forEach(function(item){
-    if (item.innerHTML.indexOf('\\{\\{') >= 0) {
-      item.innerHTML = item.innerHTML.replace(/\\{\\{/g,'{ {');
-    }
-    if (item.innerHTML.indexOf('\\}\\}') >= 0) {
-      item.innerHTML = item.innerHTML.replace(/\\}\\}/g,'} }');
-    }
-    if (item.innerHTML.indexOf('\\{\\%') >= 0) {
-      item.innerHTML = item.innerHTML.replace(/\\{\\%/g,'\{\%');
-    }
-    if (item.innerHTML.indexOf('\\%\\}') >= 0) {
-      item.innerHTML = item.innerHTML.replace(/\\%\\}/g,'\%\}');
-    }
-  });
-};
