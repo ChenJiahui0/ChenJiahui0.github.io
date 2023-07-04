@@ -161,6 +161,7 @@ public class DSU {
 
 ![img](https://cdn.jsdelivr.net/gh/Chenjiahui0/picture@main/202307021603726.png)
 
+{%
 ```java
 public class IslandNumber {
     public static void main(String[] args) {
@@ -212,7 +213,7 @@ public class IslandNumber {
     }
 }
 ```
-
+%}
 [128. 最长连续序列](https://leetcode.cn/problems/longest-consecutive-sequence/)
 
 <img src="https://cdn.jsdelivr.net/gh/CJH876492153/picture@main/image-20230703223546767.png" alt="image-20230703223546767" style="zoom:67%;" />
