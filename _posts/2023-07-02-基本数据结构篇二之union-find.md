@@ -10,7 +10,7 @@ tags:
 - 古城算法
 ---
 
-# 引用
+# 参考
 
 [古城算法ppt](https://docs.google.com/presentation/d/1GCtsrnfljBVwm_ng0izVP0M8CGs0ZcOMVoPRIPrahfk/edit#slide=id.g967dfc86ae_0_59)
 
