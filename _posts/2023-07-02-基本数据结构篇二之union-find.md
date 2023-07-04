@@ -10,7 +10,7 @@ tags:
 - 古城算法
 ---
 
-# 引用
+# 参考
 
 [古城算法ppt](https://docs.google.com/presentation/d/1GCtsrnfljBVwm_ng0izVP0M8CGs0ZcOMVoPRIPrahfk/edit#slide=id.g967dfc86ae_0_59)
 
@@ -29,7 +29,7 @@ tags:
 
 ### 基础模板
 
-```JAVA
+```java
 public class DSU {
     int[] parent;
     public DSU(int n){
@@ -127,7 +127,7 @@ public class DSU {
 
 <img src="https://cdn.jsdelivr.net/gh/Chenjiahui0/picture@main/202307021548007.png" alt="image-20230702154821968" style="zoom:67%;" />
 
-```JAVA
+```java
 class Solution {
     public int findCircleNum(int[][] isConnected) {
         DSU dsu = new DSU(isConnected.length);
@@ -159,10 +159,9 @@ public class DSU {
 }
 ```
 
-
-
 ![img](https://cdn.jsdelivr.net/gh/Chenjiahui0/picture@main/202307021603726.png)
 
+{% raw %}
 ```java
 public class IslandNumber {
     public static void main(String[] args) {
@@ -214,6 +213,7 @@ public class IslandNumber {
     }
 }
 ```
+{% endraw %}
 
 [128. 最长连续序列](https://leetcode.cn/problems/longest-consecutive-sequence/)
 
