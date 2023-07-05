@@ -23,6 +23,11 @@ tags:
    </script>
    ```
 
+# Latex教程
+[符号大全](https://zhuanlan.zhihu.com/p/472919794)
+
+[oi-wiki latex入门](https://oi-wiki.org/tools/latex)
+
 # 测试
 $$
 index(child) = 2k+1 = 2k+2\\
