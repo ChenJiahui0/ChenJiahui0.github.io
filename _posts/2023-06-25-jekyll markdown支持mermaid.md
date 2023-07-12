@@ -32,6 +32,9 @@ tags:
 用例1
 
 ```mermaid
+---
+title: 标题
+---
 graph TD;
     A-->B;
     A-->C;
