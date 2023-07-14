@@ -348,7 +348,7 @@
             var $image = $(this);
             var alt = $image.attr('alt');
             var src = $image.attr('src');
-            $imageWrapLink = $image.wrap('<a data-fancybox=images data-caption="'+ alt +'" href="' + src + '"></a>');
+            $imageWrapLink = $image.wrap('<a data-fancybox="gallery" data-caption="'+ alt +'" href="' + src + '"></a>');
         });
 
         // fix微信分享二维码需要开新页面查看问题
