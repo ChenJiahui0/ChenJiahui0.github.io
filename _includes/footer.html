@@ -354,9 +354,8 @@
         // fix微信分享二维码需要开新页面查看问题
         $('.qrcode').attr('data-fancybox', 'images');
 
-        $().fancybox({
-            openEffect    : 'elastic',
-            closeEffect   : 'elastic',
+        Fancybox.bind('[data-fancybox="gallery"]', {
+            //
         });
     }
 </script>
