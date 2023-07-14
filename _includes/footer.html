@@ -346,7 +346,7 @@
     function wrapImageWithFancyBox() {
         $('img').not('.sidebar-image img').not('.icon').not('#author-avatar img').not(".mdl-menuimg").not(".something-else-logo img").not('.avatar').not('.share-body img').each(function() {
             var $image = $(this);
-            var alt = $image.attr('alt');
+            var alt = $image.attr('alt') ? $image.attr('alt') : 'img';
             var src = $image.attr('src');
             $imageWrapLink = $image.wrap('<a data-fancybox="gallery" data-caption="'+ alt +'" href="' + src + '"></a>');
         });
