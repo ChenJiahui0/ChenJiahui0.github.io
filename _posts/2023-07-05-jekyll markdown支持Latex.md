@@ -21,6 +21,14 @@ tags:
    <script type="text/javascript" async
         src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
    </script>
+   <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
    ```
 
 # Latex教程
@@ -29,6 +37,8 @@ tags:
 [oi-wiki latex入门](https://oi-wiki.org/tools/latex)
 
 # 测试
+$O(logn)$
+
 $$
 index(child) = 2k+1 = 2k+2\\
 index(parent) = (k-1)/2\\
