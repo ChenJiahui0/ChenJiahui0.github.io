@@ -1,7 +1,7 @@
 ---
 title: Apache Druid二之系统设计
 layout: post
-published: false
+published: true
 author: 陈家辉
 tags:
   - Druid
@@ -142,7 +142,7 @@ segment由四部分组成：
 * `is_realtime`: 如果segment仅在实时任务上可用，则为 True。对于使用实时摄入的数据源，这通常会从 true 开始，然后在segment发布和传递时变为 false。
 * `is_ overshadowed`: 如果segment被发布(`used`设置为 True)且被其他一些已发布segment完全覆盖，则为 True。一般来说，这是一个暂时的状态，处于这种状态的segment很快就会将它们的`used`标志自动设置为 false。
 
-### 可用性以及一致性
+## 可用性以及一致性
 
 Druid 在摄入和查询之间有一个架构上的分离，如上面的索引和切换中所描述的。这意味着在理解 Druid 的可用性和一致性属性时，我们必须分别研究每个部分。
 
@@ -157,4 +157,18 @@ Druid 在摄入和查询之间有一个架构上的分离，如上面的索引�
 * 有监督的“可寻找流”摄取方法，如kafka和 Kinesis 是幂等的，因为流偏移量和段元数据存储在一起，并在锁步更新。
 * 基于 Hadoop 的批量摄取是等幂的，除非您的输入源之一与您正在摄取的druid数据源相同。在这种情况下，两次运行同一个任务是非等幂的，因为您是在添加现有数据，而不是覆盖它。
 * 本机批量摄取是幂等的，除非 `appendToExisting`为 true，或者您的某个输入源与您正在摄取的druid数据源相同。在这两种情况中的任何一种情况下，两次运行同一个任务都是非幂等的，因为您是在添加现有数据，而不是覆盖它。
+
+在查询方面，Druid Broker 负责确保在给定的查询中包含一组一致的segment。它根据当前可用的内容选择适当的segment版本集，以便在查询启动时使用。这是由原子替换支持的，这个特性可以确保从用户的角度来看，查询可以立即从旧版本的数据切换到新的数据集，而不会造成一致性或性能影响。(参见上面的段版本控制。)这用于基于 Hadoop 的批处理摄取、当`appendToExisting`为 false 时的本机批处理摄取和压缩。
+
+### 查询过程
+
+查询请求会分布在Druid集群中，通过Broker管理。查询首先会到达Broker，Broker标识那些segments可能与此次查询有关。这些segment通过时间进行剪枝，也可以通过你的datasource指定的数据分区指标剪枝。Broker会指出哪些Historical和MiddlManager拥有这些segment并且分发重写的子查询到对应的进程。这些进程(Historical/MiddlManager)进程执行每个子查询然后返回结果给Broker。Broker会对这些分散的数据做聚合得到最终的结果进行相应。
+
+时间和属性剪枝是Druid减少每个查询必须扫描的数据量的重要方法，但这不是唯一的方法。对于粒度级别比 Broker 可以用于修剪的过滤器低，每个segment内的索引结构允许 Historical 在查看任何数据行之前找出哪些(如果有的话)行匹配过滤器集。一旦Historical知道哪些行匹配特定的查询，它只访问该查询所需的特定行和列。
+
+综上所述，Druid使用三种不同的技术来优化查询性能：
+
+* 减少需要访问的segment的数量
+* 在每个segment中，使用索引确定哪些行需要访问
+* 在每个segment中，只读与此次查询相关特定的行和列
 
