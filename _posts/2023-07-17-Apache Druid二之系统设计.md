@@ -1,7 +1,7 @@
 ---
 title: Apache Druid二之系统设计
 layout: post
-pubulished: false
+published: false
 author: 陈家辉
 tags:
   - Druid
