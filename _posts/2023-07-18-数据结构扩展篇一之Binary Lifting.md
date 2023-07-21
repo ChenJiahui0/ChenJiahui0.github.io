@@ -13,6 +13,7 @@ tags:
 # 参考
 
 [古城算法ppt](https://docs.google.com/presentation/d/1F0gjgdt4f5IQAOpMY_YDm0amnxdbGAk6fUUO9rUwCww/edit#slide=id.p)
+
 [倍增](https://oi-wiki.org/basic/binary-lifting/)
 
 # 是什么
