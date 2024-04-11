@@ -1,6 +1,6 @@
 ---
-title: DataServLayer
-subtitle:  广告系统数据服务层
+title: 广告系统数据服务层
+subtitle: 承载日请求十亿级服务的缓存系统
 layout: post
 author: 陈家辉
 tags:
