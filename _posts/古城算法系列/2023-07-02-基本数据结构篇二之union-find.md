@@ -123,7 +123,7 @@ public class DSU {
 
 # 习题
 
-[547. 省份数量](https://leetcode.cn/problems/number-of-provinces/)
+## [547. 省份数量](https://leetcode.cn/problems/number-of-provinces/)
 
 <img src="https://cdn.jsdelivr.net/gh/Chenjiahui0/picture@main/202307021548007.png" alt="image-20230702154821968" style="zoom:67%;" />
 
@@ -215,7 +215,7 @@ public class IslandNumber {
 ```
 {% endraw %}
 
-[128. 最长连续序列](https://leetcode.cn/problems/longest-consecutive-sequence/)
+## [128. 最长连续序列](https://leetcode.cn/problems/longest-consecutive-sequence/)
 
 <img src="https://cdn.jsdelivr.net/gh/CJH876492153/picture@main/image-20230703223546767.png" alt="image-20230703223546767" style="zoom:67%;" />
 
